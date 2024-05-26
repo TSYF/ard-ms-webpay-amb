@@ -7,7 +7,29 @@ import { Sale, saleMatcher } from '../types/Sale';
 import { RequestBody } from '../utils';
 import { tx } from '@/config/tbk';
 import { SalePayload } from '@/types/SalePayload';
+import Transaction from 'transbank-sdk/dist/es5/transbank/webpay/webpay_plus/transaction';
 const router = express.Router();
+
+//* Show
+router.get("/:token", async (req, res) => {
+    const { token } = req.params;
+
+    try {
+        const status = await tx.status(token)
+
+        const CODE = 200;
+        return res.status(CODE).send(status);
+    } catch (error: unknown) {
+        console.error(error)
+        const CODE = 500;
+        
+        res.status(CODE)
+    }
+        // const output = response.detailOutput[0];
+        // if (output.responseCode === 0) {
+        //   // La transacción se ha realizado correctamente
+        // }
+})
 
 //* Store
 router.post(
@@ -24,7 +46,6 @@ router.post(
         res.status(200).send(response);
     }
 )
-
 
 module.exports = router;
 export default router;

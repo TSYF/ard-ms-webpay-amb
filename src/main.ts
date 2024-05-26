@@ -9,4 +9,4 @@ app.use(express.json());
 const { PORT, DEFAULT_API_PREFIX } = envs;
 
 app.use(DEFAULT_API_PREFIX, serviceRouter);
-app.listen(PORT || 8000, () => console.log("MS-SERVICE-BFF STARTED"));
+app.listen(PORT || 8000, () => console.log("MS-WEBPAY-AMB STARTED"));
